@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/tasks")
 public class TaskController {
 
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
 
     public TaskController(TaskRepository taskRepository){
