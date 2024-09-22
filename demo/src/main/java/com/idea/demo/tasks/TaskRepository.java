@@ -27,5 +27,21 @@ public class TaskRepository {
         return null;
     }
 
+    public void updateCompleted(Boolean status, int id){
+        for(Task task:taskRepo){
+            if(task.getId() == id){
+                task.setCompleted(status);
+            }
+        }
+    }
+
+    public void updateDetails(String title, String description, int id){
+        for(Task task:taskRepo){
+            if(task.getId() == id){
+                task.setTitle(title);
+                task.setDescription(description);
+            }
+        }
+    }
 
 }

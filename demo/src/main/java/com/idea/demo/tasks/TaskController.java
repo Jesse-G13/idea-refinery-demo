@@ -19,7 +19,7 @@ public class TaskController {
         this.taskRepository = taskRepository;
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/home")
     public String homePage(){
         return "Welcome to the web-app";
     }
@@ -36,10 +36,22 @@ public class TaskController {
         return taskRepository.getAllTasks();
     }
 
-    @GetMapping("/{id}")
-    public Task getTaskId(int id){
+    @GetMapping("/id{id}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public Task getTaskId(@RequestParam(value="id") Integer id){
 
         return taskRepository.getTaskById(id);
     }
 
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void updateCompleted(@RequestParam Boolean completed, @RequestParam Integer id){
+        taskRepository.updateCompleted(completed,id);
+    }
+
+    @PutMapping("/updateDetails")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void updateDetails(@RequestParam String title, @RequestParam String description, @RequestParam Integer id){
+        taskRepository.updateDetails(title,description, id);
+    }
 }
