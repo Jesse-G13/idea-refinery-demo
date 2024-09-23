@@ -26,7 +26,7 @@ public class TaskController {
     public String homePage(){
         return "Welcome to the web-app";
     }
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void createTask(@RequestBody Task task){
         if(taskRepository.idInRepository(task.getId())){
@@ -67,4 +67,14 @@ public class TaskController {
         }
         taskRepository.updateDetails(title,description, id);
     }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateTask(@RequestBody Task task){
+        if(taskRepository.getTaskById(task.getId()) == null){
+            throw new TaskNotFoundException(task.getId());
+        }
+        taskRepository.updateTask(task);
+    }
+
 }

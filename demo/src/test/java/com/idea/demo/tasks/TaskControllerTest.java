@@ -2,6 +2,7 @@ package com.idea.demo.tasks;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,8 +13,8 @@ class TaskControllerTest {
 
     private final Task task = new Task();
 
-    TaskController taskController;
-    TaskRepository taskRepository;
+    private TaskController taskController;
+    private TaskRepository taskRepository;
 
     @BeforeEach
     public void initTask(){
@@ -25,6 +26,7 @@ class TaskControllerTest {
         task.setId(3);
         taskRepository = new TaskRepository();
         taskController = new TaskController(taskRepository);
+
 
     }
 
@@ -70,5 +72,22 @@ class TaskControllerTest {
         assertNull(taskRepository.getTaskById(1));
     }
 
+    @Test
+    public void updateTask(){
+        Task updatedTask = new Task();
+        updatedTask.setTitle("Set new Title");
+        updatedTask.setDescription("Set new Description");
+        updatedTask.setId(3);
+        updatedTask.setDate(Mockito.mock());
+        updatedTask.setCompleted_date(Mockito.mock());
+        updatedTask.setCompleted(true);
+
+        taskRepository.addTask(task);
+        taskRepository.updateTask(updatedTask);
+        assertEquals(updatedTask.getTitle(), taskRepository.getTaskById(updatedTask.getId()).getTitle());
+        assertEquals(updatedTask.getDescription(), taskRepository.getTaskById(updatedTask.getId()).getDescription());
+        assertEquals(updatedTask.getCompleted(), taskRepository.getTaskById(updatedTask.getId()).getCompleted());
+
+    }
 
 }

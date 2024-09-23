@@ -51,4 +51,16 @@ public class TaskRepository{
         return false;
     }
 
+    public void updateTask(Task updatedTask){
+        for(Task task: taskRepo){
+            if(task.getId() == updatedTask.getId()){
+                task.setTitle(updatedTask.getTitle());
+                task.setDescription(updatedTask.getDescription());
+                task.setDate(updatedTask.getDate());
+                task.setCompleted(updatedTask.getCompleted());
+                task.setCompleted_date(updatedTask.getCompleted_date());
+            }
+        }
+    }
+
 }
