@@ -4,8 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class TaskControllerTest {
@@ -64,6 +63,11 @@ class TaskControllerTest {
         taskController.updateDetails(updatedTitle, updatedDescription,task.getId());
         assertEquals("Updated Title", task.getTitle());
         assertEquals("Updated Description", task.getDescription());
+    }
+
+    @Test
+    public void taskDoesNotExist() {
+        assertNull(taskRepository.getTaskById(1));
     }
 
 

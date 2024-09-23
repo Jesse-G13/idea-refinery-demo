@@ -1,6 +1,5 @@
 package com.idea.demo.tasks;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -42,6 +41,14 @@ public class TaskRepository{
                 task.setDescription(description);
             }
         }
+    }
+    public boolean idInRepository(int id){
+        for(Task task:taskRepo){
+            if(task.getId() == id){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
