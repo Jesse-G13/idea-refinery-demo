@@ -24,7 +24,7 @@ public class TaskController {
         return "Welcome to the web-app";
     }
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public void createTask(@RequestBody Task task){
 
         taskRepository.addTask(task);
@@ -36,22 +36,22 @@ public class TaskController {
         return taskRepository.getAllTasks();
     }
 
-    @GetMapping("/id{id}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public Task getTaskId(@RequestParam(value="id") Integer id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public Task getTaskId(@PathVariable("id") int id){
 
         return taskRepository.getTaskById(id);
     }
 
-    @PutMapping("/update")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void updateCompleted(@RequestParam Boolean completed, @RequestParam Integer id){
+    @PutMapping("/update/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateCompleted(@RequestBody boolean completed, @PathVariable("id") Integer id){
         taskRepository.updateCompleted(completed,id);
     }
 
-    @PutMapping("/updateDetails")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void updateDetails(@RequestParam String title, @RequestParam String description, @RequestParam Integer id){
+    @PutMapping("/updateDetails/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateDetails(@RequestParam String title, @RequestParam String description, @PathVariable int id){
         taskRepository.updateDetails(title,description, id);
     }
 }

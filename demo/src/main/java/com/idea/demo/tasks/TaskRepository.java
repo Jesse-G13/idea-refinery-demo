@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class TaskRepository {
+public class TaskRepository{
     private List<Task> taskRepo = new ArrayList<>();
 
     public List<Task> getAllTasks(){
